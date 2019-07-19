@@ -36,7 +36,7 @@ module.exports = (req, res) => {
             if (!stats.currentSeason) {
                 msg.channel.send('Deu bosta, tente novamente!!')
             } else {
-                let embeds = createEmbedFortStatsTracker(stats)
+                let embeds = createEmbedForStatsTracker(stats)
                 msg.channel.send(embeds[0])
                 msg.channel.send(embeds[1])
             }
