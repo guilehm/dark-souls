@@ -12,7 +12,12 @@ async function getUserStats(username) {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
             if (error) reject(error)
-            data = JSON.parse(body)
+            try {
+                data = JSON.parse(body)
+            } catch (err) {
+                reject(err)
+            }
+            data.username = username
             resolve(data)
         })
     })
