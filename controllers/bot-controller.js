@@ -8,7 +8,7 @@ const client = new Discord.Client()
 module.exports = (req, res) => {
 
     client.on('ready', (msg) => {
-        client.channels.find(c => c.name === 'parça-bot')
+        client.channels.find(c => c.name === 'geral')
             .send('Acordei')
     })
 
@@ -35,4 +35,7 @@ module.exports = (req, res) => {
     })
 
     client.login(token)
+    res.status(200).end(JSON.stringify({
+        mensagem: 'Bot acordado com sucesso'
+    }))
 }
