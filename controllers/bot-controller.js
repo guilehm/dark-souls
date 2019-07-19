@@ -6,6 +6,12 @@ const getUserStats = require('../helpers/get-user-stats')
 const client = new Discord.Client()
 
 module.exports = (req, res) => {
+
+    client.on('ready', (msg) => {
+        client.channels.find(c => c.name === 'parça-bot')
+            .send('Acordei')
+    })
+
     client.on('message', async (msg) => {
         let handleResponse = data => {
             let stats = data
