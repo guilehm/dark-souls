@@ -17,7 +17,7 @@ function parseData(data) {
         let kills = stats.currentSeason.kills
         stats.currentSeason.kills.total = kills.solo + kills.duo + kills.squad
         let kd = stats.currentSeason.kd
-        stats.currentSeason.kd.total = (kd.solo + kd.duo + kd.squad) /3
+        stats.currentSeason.kd.total = (kd.solo + kd.duo + kd.squad) / 3
 
         let winsLifetime = stats.lifeTime.wins
         stats.lifeTime.wins.total = winsLifetime.solo + winsLifetime.duo + winsLifetime.squad
@@ -26,7 +26,7 @@ function parseData(data) {
         let killsLifetime = stats.lifeTime.kills
         stats.lifeTime.kills.total = killsLifetime.solo + killsLifetime.duo + killsLifetime.squad
         let kdLifetime = stats.lifeTime.kd
-        stats.lifeTime.kd.total = (kdLifetime.solo + kdLifetime.duo + kdLifetime.squad) /3
+        stats.lifeTime.kd.total = (kdLifetime.solo + kdLifetime.duo + kdLifetime.squad) / 3
         return stats
     }
 
@@ -95,7 +95,7 @@ async function getUserStatsTracker(username, platform) {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
             if (error) reject(error)
-             try {
+            try {
                 data = JSON.parse(body)
                 let parsedData = parseData(data)
                 resolve(parsedData)
