@@ -18,10 +18,12 @@ module.exports = (req, res) => {
             msg.channel.send('Deu bosta, tente novamente!')
         }
         let handleResponse = (data) => {
-            if (!data.vitorias) {
-                msg.channel.send('Deu bosta, tente novamente!')
+            if (!data.kills) {
+                msg.channel.send('Deu bosta, tente novamente!\n\t' + 
+                    '*A API da v2 está instável, utilize a v1.*\n' + 
+                    '*Se precisar de ajuda digite* `.h`')
             } else {
-                msg.channel.send(createEmbedFortStats(data))
+                msg.channel.send(createEmbedForStats(data))
             }
         }
         let handleResponseTracker = (data) => {
