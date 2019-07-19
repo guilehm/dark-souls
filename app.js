@@ -1,30 +1,14 @@
-const Discord = require('discord.js')
-const token = process.env.DISCORD_TOKEN
-const request = require('request')
-const getUserStats = require('./helpers/get-user-stats')
+const express = require('express')
 
-const client = new Discord.Client()
+const DEBUG = process.env.DEBUG
+const PORT = process.env.PORT || 4000
 
-client.on('message', async (msg) => {
-    let handleResponse = data => {
-        let stats = data
-        if (!stats.vitorias) {
-            msg.channel.send('Deu bosta, tente novamente!')
-        } else {
-            let response = `
-                kills: ${stats.kills}\nvitórias: ${stats.vitorias}\nkd: ${stats.kd}\npartidas: ${stats.partidas}`
-            msg.channel.send(response)
-        }
-    }
+const app = new express()
+const botController = require('./controllers/bot-controller')
 
-    if (msg.content === '.ping') {
-        msg.channel.send(`Oi, ${msg.author}, estou conectado!`)
-    }
+app.get('/', botController)
 
-    if (msg.content.startsWith('.s ')) {
-        let username = msg.content.split(' ').pop()
-        await getUserStats(username).then(handleResponse, handleResponse)
-    }
+app.listen(PORT, () => {
+    let message = DEBUG ? 'Starting development server on port' : 'App listening on port'
+    console.log(message, `${PORT}`)
 })
-
-client.login(token)
