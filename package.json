@@ -1,0 +1,22 @@
+{
+  "name": "dark-souls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guilehm/dark-souls.git"
+  },
+  "author": "guile.hm@hotmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Guilehm/dark-souls/issues"
+  },
+  "homepage": "https://github.com/Guilehm/dark-souls#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
+}
