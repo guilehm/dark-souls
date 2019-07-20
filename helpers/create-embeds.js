@@ -59,7 +59,7 @@ function createHelperEmbed() {
         .addBlankField()
         .addField('Status V1', 'digite: ```.s <nome-do-usuario> <plataforma>```')
         .addField('Status V2 (instável)', 'digite: ```.s <nome-do-usuario>```')
-        .addField('Ping', 'digite: ```.s ping```')
+        .addField('Ping', 'digite: ```.ping```')
         .addField('Acordar', 'Caso eu esteja dormindo, digite: ```.acordar```')
         .setTimestamp()
         .setFooter('https://investir-xp-node.herokuapp.com/', 'https://investir-xp-node.herokuapp.com/')
