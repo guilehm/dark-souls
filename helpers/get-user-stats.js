@@ -1,9 +1,10 @@
 const request = require('request')
 
 
-async function getUserStats(username) {
-
-    const cleanStatsApi = process.env.CLEAN_STATS_API
+async function getUserStats(username, req) {
+    let hostname = req.headers.host
+    let protocol = req.connection.encrypted ? 'https' : 'http'
+    let cleanStatsApi = `${protocol}://${hostname}/stats/`
 
     let options = {
         url: cleanStatsApi,
