@@ -52,7 +52,7 @@ module.exports = (req, res) => {
             msg.channel.startTyping()
             let [, username, platform] = msg.content.split(' ')
             if (!platform) {
-                await getUserStats(username).then(handleResponse, handleError)
+                await getUserStats(username, req).then(handleResponse, handleError)
             } else {
                 await getUserStatsTracker(username, platform).then(handleResponseTracker, handleError)
             }
