@@ -16,6 +16,7 @@ module.exports = (req, res) => {
     client.on('ready', (msg) => {
         client.channels.find(c => c.name === 'parça-bot-testes')
             .send('Acordei')
+        client.user.setActivity('Netflix', { type: 'WATCHING' })
     })
 
     client.on('message', async (msg) => {
