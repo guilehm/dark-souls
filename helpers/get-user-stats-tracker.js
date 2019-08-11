@@ -76,34 +76,34 @@ function parseData(data) {
                 squad: squad.kd.valueDec,
             },
         },
-    }
-    return addTotals(stats)
+    };
+    return addTotals(stats);
 }
 
 async function getUserStatsTracker(username, platform) {
 
-    const trackerApi = 'https://api.fortnitetracker.com/v1/profile'
-    const trackerApiToken = process.env.TRACKER_STATS_TOKEN
+    const trackerApi = 'https://api.fortnitetracker.com/v1/profile';
+    const trackerApiToken = process.env.TRACKER_STATS_TOKEN;
 
-    let url = `${trackerApi}/${platform}/${username}/`
+    let url = `${trackerApi}/${platform}/${username}/`;
 
     let options = {
         url: url,
         headers: { 'TRN-Api-Key': trackerApiToken },
-    }
+    };
 
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
-            if (error) reject(error)
+            if (error) reject(error);
             try {
-                data = JSON.parse(body)
-                let parsedData = parseData(data)
-                resolve(parsedData)
+                data = JSON.parse(body);
+                let parsedData = parseData(data);
+                resolve(parsedData);
             } catch (err) {
-                reject(err)
+                reject(err);
             }
-        })
-    })
+        });
+    });
 }
 
-module.exports = getUserStatsTracker
+module.exports = getUserStatsTracker;
