@@ -1,5 +1,5 @@
-const nodeLogger = require('node-logger');
-const logger = nodeLogger.createLogger();
+const logger = require('heroku-logger');
+
 
 module.exports = (req, res) => {
     let message = "bot is healthy";
