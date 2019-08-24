@@ -24,6 +24,8 @@ module.exports = (req, res, next) => {
 
         keepAlive();
     };
-    res.send('ok');
+    res.send(JSON.stringify({
+        success: true
+    }));
     next();
 };
