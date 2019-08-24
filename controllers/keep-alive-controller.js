@@ -3,6 +3,8 @@ const request = require('request');
 const KEEP_ALIVE = process.env.KEEP_ALIVE || false;
 const INTERVAL = process.env.INTERVAL || 5;
 
+let interval = INTERVAL * 60 * 1000;
+
 
 module.exports = (req, res, next) => {
     if (KEEP_ALIVE) {
@@ -10,10 +12,9 @@ module.exports = (req, res, next) => {
         let protocol = req.connection.encrypted ? 'https' : 'http';
         let url = `${protocol}://${hostname}/healthcheck/`;
 
-        function keepAlive(interval=INTERVAL) {
-            interval = interval * 60 * 1000;
+        function keepAlive() {
             setTimeout(() => {
-                console.log(`ping every ${interval} minutes.`);
+                console.log(`ping every ${interval} seconds.`);
                 request.get(url);
                 keepAlive(interval);
             }, interval);
@@ -21,5 +22,6 @@ module.exports = (req, res, next) => {
 
         keepAlive();
     };
+    res.send('ok');
     next();
 };
