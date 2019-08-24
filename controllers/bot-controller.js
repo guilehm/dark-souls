@@ -32,7 +32,7 @@ module.exports = (req, res) => {
                 msg.channel.send('Ops...ocorreu um erro ao comunicar com a API, tente novamente!\n\t' +
                     '*A API da v2 está instável, utilize a v1.*\n' +
                     '*Se precisar de ajuda digite* `.h`');
-                logger.error(`Error handling response for data: ${data}`);
+                logger.error(`Error handling response for data: ${JSON.stringify(data)}`);
             } else {
                 msg.channel.send(createEmbedForStats(data));
             }
@@ -41,7 +41,7 @@ module.exports = (req, res) => {
             let stats = data;
             if (!stats.currentSeason) {
                 msg.channel.send('Ops...ocorreu um erro na API do Fortnite Tracker, tente novamente!!');
-                logger.error(`Error handling response for data: ${data}`);
+                logger.error(`Error handling response for data: ${JSON.stringify(data)}`);
             } else {
                 let embeds = createEmbedForStatsTracker(stats);
                 msg.channel.send(embeds[0]);
