@@ -11,6 +11,7 @@ const healthcheckController = require('./controllers/healthcheck-controller');
 const keepAliveController = require('./controllers/keep-alive-controller');
 
 app.get('/', keepAliveController, botController);
+app.get('/keep-alive/', keepAliveController);
 app.get('/stats/', cleanStatsController);
 app.get('/healthcheck/', healthcheckController);
 
