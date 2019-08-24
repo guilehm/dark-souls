@@ -8,8 +8,9 @@ const app = new express();
 const botController = require('./controllers/bot-controller');
 const cleanStatsController = require('./controllers/clean-stats-controller');
 const healthcheckController = require('./controllers/healthcheck-controller');
+const keepAliveController = require('./controllers/keep-alive-controller');
 
-app.get('/', botController);
+app.get('/', keepAliveController, botController);
 app.get('/stats/', cleanStatsController);
 app.get('/healthcheck/', healthcheckController);
 
