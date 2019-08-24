@@ -1,4 +1,7 @@
 const Discord = require('discord.js');
+const nodeLogger = require('node-logger');
+
+const logger = nodeLogger.createLogger();
 const token = process.env.DISCORD_TOKEN;
 
 const getUserStats = require('../helpers/get-user-stats');
@@ -20,14 +23,16 @@ module.exports = (req, res) => {
     });
 
     client.on('message', async (msg) => {
-        let handleError = () => {
+        let handleError = (err) => {
             msg.channel.send('Ops...ocorreu um erro, tente novamente!');
+            logger.error(err);
         };
         let handleResponse = (data) => {
             if (!data.kills) {
                 msg.channel.send('Ops...ocorreu um erro ao comunicar com a API, tente novamente!\n\t' +
                     '*A API da v2 está instável, utilize a v1.*\n' +
                     '*Se precisar de ajuda digite* `.h`');
+                logger.error(`Error handling response for data: ${data}`);
             } else {
                 msg.channel.send(createEmbedForStats(data));
             }
@@ -36,6 +41,7 @@ module.exports = (req, res) => {
             let stats = data;
             if (!stats.currentSeason) {
                 msg.channel.send('Ops...ocorreu um erro na API do Fortnite Tracker, tente novamente!!');
+                logger.error(`Error handling response for data: ${data}`);
             } else {
                 let embeds = createEmbedForStatsTracker(stats);
                 msg.channel.send(embeds[0]);
