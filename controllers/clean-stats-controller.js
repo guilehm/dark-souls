@@ -1,8 +1,6 @@
 const request = require('request');
 const getUserId = require('../helpers/get-user-id');
-const nodeLogger = require('node-logger');
-
-const logger = nodeLogger.createLogger();
+const logger = require('heroku-logger');
 
 
 module.exports = async (req, res) => {

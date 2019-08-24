@@ -1,11 +1,10 @@
 const express = require('express');
-const nodeLogger = require('node-logger');
+const logger = require('heroku-logger');
 
 const DEBUG = process.env.DEBUG;
 const PORT = process.env.PORT || 4000;
 
 const app = new express();
-const logger = nodeLogger.createLogger();
 
 const botController = require('./controllers/bot-controller');
 const cleanStatsController = require('./controllers/clean-stats-controller');

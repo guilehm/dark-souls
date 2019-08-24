@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
-const nodeLogger = require('node-logger');
+const logger = require('heroku-logger');
 
-const logger = nodeLogger.createLogger();
 const token = process.env.DISCORD_TOKEN;
 
 const getUserStats = require('../helpers/get-user-stats');

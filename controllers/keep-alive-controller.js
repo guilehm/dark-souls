@@ -1,11 +1,10 @@
 const request = require('request');
-const nodeLogger = require('node-logger');
+const logger = require('heroku-logger');
 
 const KEEP_ALIVE = process.env.KEEP_ALIVE || false;
 const INTERVAL = process.env.INTERVAL || 5;
 
 let interval = INTERVAL * 60 * 1000;
-const logger = nodeLogger.createLogger();
 
 
 module.exports = (req, res, next) => {
