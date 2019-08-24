@@ -1,12 +1,17 @@
 const request = require('request');
 const getUserId = require('../helpers/get-user-id');
+const nodeLogger = require('node-logger');
+
+const logger = nodeLogger.createLogger();
+
 
 module.exports = async (req, res) => {
 
     const apiStats = process.env.STATS_API;
     let username = req.query.username;
 
-    let handleError = () => {
+    let handleError = (err) => {
+        logger.error(JSON.stringify(err));
         return res.end(JSON.stringify({
             error: true,
             message: 'Que merda! Ocorreu um erro'
@@ -36,7 +41,7 @@ module.exports = async (req, res) => {
         request(options, (error, response, body) => {
             data = JSON.parse(body);
             if (data.success === false) {
-                return handleError();
+                return handleError(data);
             }
             return handleSuccess(data);
         });
