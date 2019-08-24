@@ -1,9 +1,11 @@
 const express = require('express');
+const nodeLogger = require('node-logger');
 
 const DEBUG = process.env.DEBUG;
 const PORT = process.env.PORT || 4000;
 
 const app = new express();
+const logger = nodeLogger.createLogger();
 
 const botController = require('./controllers/bot-controller');
 const cleanStatsController = require('./controllers/clean-stats-controller');
@@ -17,5 +19,5 @@ app.get('/healthcheck/', healthcheckController);
 
 app.listen(PORT, () => {
     let message = DEBUG ? 'Starting development server on port' : 'App listening on port';
-    console.log(message, `${PORT}`);
+    logger.info(message, `${PORT}`);
 });
