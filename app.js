@@ -17,6 +17,6 @@ app.get('/stats/', cleanStatsController);
 app.get('/healthcheck/', healthcheckController);
 
 app.listen(PORT, () => {
-    let message = DEBUG ? 'Starting development server on port' : 'App listening on port';
-    logger.info(message, `${PORT}`);
+    let message = DEBUG ? 'Starting development server on port ' : 'App listening on port ';
+    logger.info(message + `${PORT}`);
 });
