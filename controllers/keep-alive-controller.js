@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
         function keepAlive(interval=INTERVAL) {
             interval = interval * 60 * 1000;
             setTimeout(() => {
+                console.log(`ping every ${interval} minutes.`);
                 request.get(url);
                 keepAlive(interval);
             }, interval);
