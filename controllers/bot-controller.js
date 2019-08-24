@@ -24,7 +24,7 @@ module.exports = (req, res) => {
     client.on('message', async (msg) => {
         let handleError = (err) => {
             msg.channel.send('Ops...ocorreu um erro, tente novamente!');
-            logger.error(err);
+            logger.error(JSON.stringify(err));
         };
         let handleResponse = (data) => {
             if (!data.kills) {
