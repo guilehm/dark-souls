@@ -21,11 +21,11 @@ module.exports = (req, res) => {
 
     client.on('message', async (msg) => {
         let handleError = () => {
-            msg.channel.send('Deu bosta, tente novamente!');
+            msg.channel.send('Ops...ocorreu um erro, tente novamente!');
         };
         let handleResponse = (data) => {
             if (!data.kills) {
-                msg.channel.send('Deu bosta, tente novamente!\n\t' +
+                msg.channel.send('Ops...ocorreu um erro ao comunicar com a API, tente novamente!\n\t' +
                     '*A API da v2 está instável, utilize a v1.*\n' +
                     '*Se precisar de ajuda digite* `.h`');
             } else {
@@ -35,7 +35,7 @@ module.exports = (req, res) => {
         let handleResponseTracker = (data) => {
             let stats = data;
             if (!stats.currentSeason) {
-                msg.channel.send('Deu bosta, tente novamente!!');
+                msg.channel.send('Ops...ocorreu um erro na API do Fortnite Tracker, tente novamente!!');
             } else {
                 let embeds = createEmbedForStatsTracker(stats);
                 msg.channel.send(embeds[0]);
