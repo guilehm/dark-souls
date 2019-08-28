@@ -78,13 +78,17 @@ module.exports = (req, res) => {
             if (!stock) {
                 msg.channel.send(`${msg.author}, digite o código da ação corretamente!`);
             } else {
-                stockData = getStockAnalysis(stock);
-                msg.channel.send(JSON.stringify(stockData));
+                let handleAnalysisResponse = data => {
+                    msg.channel.send(data);
+                };
+                stockData = await getStockAnalysis(stock)
+                    .then(handleAnalysisResponse)
+                    .catch(handleAnalysisResponse);
             }
             msg.channel.stopTyping();
         }
 
-        if ((msg.content.startsWith('.h') || msg.content.startsWith('.a'))) {
+        if (msg.content.startsWith('.h')) {
             msg.channel.startTyping();
             let embed = createHelperEmbed();
             msg.channel.send(embed);
