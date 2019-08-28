@@ -2,21 +2,20 @@ const request = require('request');
 const logger = require('heroku-logger');
 
 
-module.exports = async (req, res) => {
+function getStockAnalysis(stock) {
     const stocksEndpoint = process.env.STOCKS_ENDPOINT;
-    let stock = req.query.stock;
 
     let handleError = (error, message) => {
         logger.error(error);
-        return res.end(JSON.stringify({
+        return JSON.stringify({
             error: true,
             message: message,
-        }));
+        });
         
     };
 
     let handleSuccess = data => {
-        return res.end(JSON.stringify(data));
+        return JSON.stringify(data);
     };
 
     if (!stocksEndpoint) return handleError('Stocks Endopint not set.', 'Ops... Ocorreu um erro.');
@@ -30,4 +29,6 @@ module.exports = async (req, res) => {
         if (err) return handleError(err.message, errorMessage);
         return handleSuccess(body);
     });
-};
+}
+
+module.exports = getStockAnalysis(;)
