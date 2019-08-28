@@ -25,6 +25,7 @@
     "heroku-logger": "^0.3.3",
     "jshint": "^2.10.2",
     "node-logger": "0.0.1",
+    "random-color": "^1.0.1",
     "request": "^2.88.0"
   }
 }
