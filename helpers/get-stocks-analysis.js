@@ -31,4 +31,4 @@ function getStockAnalysis(stock) {
     });
 }
 
-module.exports = getStockAnalysis(;)
+module.exports = getStockAnalysis;
