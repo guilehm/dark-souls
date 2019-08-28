@@ -12,6 +12,8 @@ const {
     createHelperEmbed,
 } = require('../helpers/create-embeds');
 
+const randomColor = require('random-color');
+
 const client = new Discord.Client();
 
 module.exports = (req, res) => {
@@ -80,10 +82,10 @@ module.exports = (req, res) => {
             } else {
                 let handleAnalysisResponse = data => {
                     let emb = new Discord.RichEmbed();
-                    emb.setColor(0xFFF000);
+                    let color = randomColor();
+                    emb.setColor(color.hexString());
                     emb.setTitle(data.Nome);    
                     emb.setDescription(data.Características || '');
-                    emb.addBlankField();
                     for (let field of Object.keys(data)) {
                         if (field !== 'Nome' || field !== 'Características'){
                             emb.addField(field, data[field]);
