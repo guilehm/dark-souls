@@ -5,11 +5,14 @@ const token = process.env.DISCORD_TOKEN;
 
 const getUserStats = require('../helpers/get-user-stats');
 const getUserStatsTracker = require('../helpers/get-user-stats-tracker');
+const getStockAnalysis = require('../helpers/get-stocks-analysis');
 const {
     createEmbedForStats,
     createEmbedForStatsTracker,
     createHelperEmbed,
 } = require('../helpers/create-embeds');
+
+const randomColor = require('random-color');
 
 const client = new Discord.Client();
 
@@ -71,7 +74,33 @@ module.exports = (req, res) => {
             msg.channel.stopTyping();
         }
 
-        if ((msg.content.startsWith('.h') || msg.content.startsWith('.a'))) {
+        if (msg.content.startsWith('.a ')) {
+            msg.channel.startTyping();
+            let [, stock] = msg.content.split(' ');
+            if (!stock) {
+                msg.channel.send(`${msg.author}, digite o código da ação corretamente!`);
+            } else {
+                let handleAnalysisResponse = data => {
+                    let emb = new Discord.RichEmbed();
+                    let color = randomColor();
+                    emb.setColor(color.hexString());
+                    emb.setTitle(data.Nome);    
+                    emb.setDescription(data.Características || '');
+                    for (let field of Object.keys(data)) {
+                        if (field !== 'Nome' || field !== 'Características'){
+                            emb.addField(field, data[field]);
+                        }
+                    }
+                    msg.channel.send(emb);
+                };
+                stockData = await getStockAnalysis(stock)
+                    .then(handleAnalysisResponse)
+                    .catch(handleAnalysisResponse);
+            }
+            msg.channel.stopTyping();
+        }
+
+        if (msg.content.startsWith('.h')) {
             msg.channel.startTyping();
             let embed = createHelperEmbed();
             msg.channel.send(embed);
