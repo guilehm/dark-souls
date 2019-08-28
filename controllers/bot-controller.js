@@ -79,7 +79,17 @@ module.exports = (req, res) => {
                 msg.channel.send(`${msg.author}, digite o código da ação corretamente!`);
             } else {
                 let handleAnalysisResponse = data => {
-                    msg.channel.send(data);
+                    let emb = new Discord.RichEmbed();
+                    emb.setColor(0xFFF000);
+                    emb.setTitle(data.Nome);    
+                    emb.setDescription(data.Características || '');
+                    emb.addBlankField();
+                    for (let field of Object.keys(data)) {
+                        if (field !== 'Nome' || field !== 'Características'){
+                            emb.addField(field, data[field]);
+                        }
+                    }
+                    msg.channel.send(emb);
                 };
                 stockData = await getStockAnalysis(stock)
                     .then(handleAnalysisResponse)
