@@ -5,6 +5,7 @@ const token = process.env.DISCORD_TOKEN;
 
 const getUserStats = require('../helpers/get-user-stats');
 const getUserStatsTracker = require('../helpers/get-user-stats-tracker');
+const getStockAnalysis = require('../helpers/get-stocks-analysis');
 const {
     createEmbedForStats,
     createEmbedForStatsTracker,
@@ -67,6 +68,18 @@ module.exports = (req, res) => {
                 await getUserStats(username, req).then(handleResponse, handleError);
             } else {
                 await getUserStatsTracker(username, platform).then(handleResponseTracker, handleError);
+            }
+            msg.channel.stopTyping();
+        }
+
+        if (msg.content.startsWith('.a ')) {
+            msg.channel.startTyping();
+            let [, stock] = msg.content.split(' ');
+            if (!stock) {
+                msg.channel.send(`${msg.author}, digite o código da ação corretamente!`);
+            } else {
+                stockData = getStockAnalysis(stock);
+                msg.channel.send(JSON.stringify(stockData));
             }
             msg.channel.stopTyping();
         }
