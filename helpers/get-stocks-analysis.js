@@ -20,9 +20,7 @@ async function getStockAnalysis(stock) {
             } catch (e) {
                 resolve(errorMessage);
             }
-            resolve(JSON.stringify(
-                parsedData.company
-            ));
+            resolve(parsedData.company);
         });
     });
 }
