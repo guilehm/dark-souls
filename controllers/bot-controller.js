@@ -87,15 +87,23 @@ module.exports = (req, res) => {
                 let handleAnalysisResponse = data => {
                     let emb = new Discord.RichEmbed();
                     let color = randomColor();
+                    let companyData = data.company;
+                    let governanceData = data.governance;
                     emb.setColor(color.hexString());
-                    emb.setTitle(data.Nome);    
-                    emb.setDescription(data.Características || '');
-                    for (let field of Object.keys(data)) {
+                    emb.setTitle(companyData.Nome);    
+                    emb.setDescription(companyData.Características || '');
+                    for (let field of Object.keys(companyData)) {
                         if (field !== 'Nome' && field !== 'Características'){
-                            emb.addField(field, data[field]);
+                            emb.addField(field, companyData[field]);
                         }
                     }
+                    emb.addField('Reclame Aqui', governanceData['Reclame Aqui']);
+                    emb.addField('Sócio majoritário', governanceData['Sócio Majoritário']);
+                    emb.addField('Gráfico', data.chart);
+                    emb.setFooter(data.video, 'https://s.ytimg.com/yts/img/favicon_48-vflVjB_Qk.png');
+                    console.log(data.video);
                     msg.channel.send(emb);
+                    
                 };
                 stockData = await getStockAnalysis(stock)
                     .then(handleAnalysisResponse)
