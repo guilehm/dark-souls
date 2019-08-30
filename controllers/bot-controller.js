@@ -80,6 +80,10 @@ module.exports = (req, res) => {
             if (!stock) {
                 msg.channel.send(`${msg.author}, digite o código da ação corretamente!`);
             } else {
+                let handleAnalysisError = err => {
+                    msg.channel.send(new Discord.RichEmbed().setTitle(err));
+                };
+
                 let handleAnalysisResponse = data => {
                     let emb = new Discord.RichEmbed();
                     let color = randomColor();
@@ -87,7 +91,7 @@ module.exports = (req, res) => {
                     emb.setTitle(data.Nome);    
                     emb.setDescription(data.Características || '');
                     for (let field of Object.keys(data)) {
-                        if (field !== 'Nome' || field !== 'Características'){
+                        if (field !== 'Nome' && field !== 'Características'){
                             emb.addField(field, data[field]);
                         }
                     }
@@ -95,7 +99,7 @@ module.exports = (req, res) => {
                 };
                 stockData = await getStockAnalysis(stock)
                     .then(handleAnalysisResponse)
-                    .catch(handleAnalysisResponse);
+                    .catch(handleAnalysisError);
             }
             msg.channel.stopTyping();
         }
