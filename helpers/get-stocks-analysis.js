@@ -18,9 +18,9 @@ async function getStockAnalysis(stock) {
             try {
                 parsedData = JSON.parse(body);
             } catch (e) {
-                resolve(errorMessage);
+                reject(errorMessage);
             }
-            resolve(parsedData.company);
+            resolve(parsedData);
         });
     });
 }
