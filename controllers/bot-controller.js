@@ -16,6 +16,11 @@ const randomColor = require('random-color');
 
 const client = new Discord.Client();
 
+function sendLog(msg)  {
+    client.channels.find(c => c.name === 'dark-souls-logs-debug')
+    .send(`${msg.author} asking: ${msg.content}`);
+}
+
 module.exports = (req, res) => {
 
     client.on('ready', (msg) => {
