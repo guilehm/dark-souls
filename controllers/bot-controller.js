@@ -30,6 +30,7 @@ module.exports = (req, res) => {
     });
 
     client.on('message', async (msg) => {
+
         let handleError = (err) => {
             msg.channel.send('Ops...ocorreu um erro, tente novamente!');
             let error = '';
@@ -63,12 +64,14 @@ module.exports = (req, res) => {
         };
 
         if (msg.content === '.ping') {
+            sendLog(msg);
             msg.channel.startTyping();
             msg.channel.send(`Oi, ${msg.author}, estou conectado!`);
             msg.channel.stopTyping();
         }
 
         if (msg.content.startsWith('.s ')) {
+            sendLog(msg);
             msg.channel.startTyping();
             let [, username, platform] = msg.content.split(' ');
             if (!platform) {
@@ -80,6 +83,7 @@ module.exports = (req, res) => {
         }
 
         if (msg.content.startsWith('.a ')) {
+            sendLog(msg);
             msg.channel.startTyping();
             let [, stock] = msg.content.split(' ');
             if (!stock) {
@@ -118,6 +122,7 @@ module.exports = (req, res) => {
         }
 
         if (msg.content.startsWith('.h')) {
+            sendLog(msg);
             msg.channel.startTyping();
             let embed = createHelperEmbed();
             msg.channel.send(embed);
