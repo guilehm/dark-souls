@@ -60,6 +60,7 @@ function createHelperEmbed() {
         .addField('Status V1', 'digite: ```.s <nome-do-usuario> <plataforma>```')
         .addField('Status V2 (instável)', 'digite: ```.s <nome-do-usuario>```')
         .addField('Ping', 'digite: ```.ping```')
+        .addField('Ações B3', 'digite: ```.a <codigo-da-acao>```')
         .setTimestamp()
         .setFooter('https://investir-xp-node.herokuapp.com/', 'https://investir-xp-node.herokuapp.com/');
 }
