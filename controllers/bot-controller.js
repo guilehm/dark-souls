@@ -108,9 +108,10 @@ module.exports = (req, res) => {
                     }
                     emb.addField('Reclame Aqui', governanceData['Reclame Aqui']);
                     emb.addField('Sócio majoritário', governanceData['Sócio Majoritário']);
+                    emb.addField('Vídeo', `https://${data.video}`);
                     emb.addField('Gráfico', data.chart);
-                    emb.setFooter(data.video, 'https://s.ytimg.com/yts/img/favicon_48-vflVjB_Qk.png');
-                    console.log(data.video);
+                    emb.setThumbnail(data.logo);
+                    emb.setFooter('https://github.com/Guilehm/stocks-crawler', 'https://avatars2.githubusercontent.com/u/33688752');
                     msg.channel.send(emb);
                     
                 };
