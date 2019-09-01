@@ -102,14 +102,15 @@ module.exports = (req, res) => {
                     emb.setTitle(companyData.Nome);    
                     emb.setDescription(companyData.Características || '');
                     for (let field of Object.keys(companyData)) {
-                        if (field !== 'Nome' && field !== 'Características'){
-                            emb.addField(field, companyData[field]);
+                        if (field !== 'Nome' && field !== 'Características' && field !== 'Site B3'){
+                            emb.addField(field, companyData[field], true);
                         }
                     }
-                    emb.addField('Reclame Aqui', governanceData['Reclame Aqui']);
-                    emb.addField('Sócio majoritário', governanceData['Sócio Majoritário']);
-                    emb.addField('Vídeo', `https://${data.video}`);
-                    emb.addField('Gráfico', data.chart);
+                    emb.addField('Reclame Aqui', governanceData['Reclame Aqui'], true);
+                    emb.addField('Sócio majoritário', governanceData['Sócio Majoritário'], true);
+                    emb.addField('Análise', `https://${data.video}`);
+                    emb.addField('Site B3', companyData['Site B3']);
+                    // emb.addField('Gráfico', data.chart);
                     emb.setThumbnail(data.logo);
                     emb.setFooter('https://github.com/Guilehm/stocks-crawler', 'https://avatars2.githubusercontent.com/u/33688752');
                     msg.channel.send(emb);
