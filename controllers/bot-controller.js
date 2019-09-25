@@ -24,7 +24,7 @@ function sendLog(msg)  {
 module.exports = (req, res) => {
 
     client.on('ready', (msg) => {
-        client.channels.find(c => c.name === 'parça-bot-testes')
+        client.channels.find(c => c.name === 'teste-private')
             .send('Acordei');
         client.user.setActivity('Netflix', { type: 'WATCHING' });
     });
