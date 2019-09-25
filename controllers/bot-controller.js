@@ -99,7 +99,7 @@ module.exports = (req, res) => {
                     let companyData = data.company;
                     let governanceData = data.governance;
                     emb.setColor(color.hexString());
-                    emb.setTitle(companyData.Nome);    
+                    emb.setTitle(companyData.Nome);
                     emb.setDescription(companyData.Características || '');
                     for (let field of Object.keys(companyData)) {
                         if (field !== 'Nome' && field !== 'Características' && field !== 'Site B3'){
@@ -114,7 +114,7 @@ module.exports = (req, res) => {
                     emb.setThumbnail(data.logo);
                     emb.setFooter('https://github.com/Guilehm/stocks-crawler', 'https://avatars2.githubusercontent.com/u/33688752');
                     msg.channel.send(emb);
-                    
+
                 };
                 stockData = await getStockAnalysis(stock)
                     .then(handleAnalysisResponse)
