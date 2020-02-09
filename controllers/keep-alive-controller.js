@@ -14,17 +14,14 @@ module.exports = (req, res, next) => {
         let url = `${protocol}://${hostname}/healthcheck/`;
 
         function keepAlive() {
-            setTimeout(() => {
+            setInterval(() => {
                 logger.info(`ping every ${interval} seconds.`);
                 request.get(url);
-                keepAlive(interval);
             }, interval);
         }
 
         keepAlive();
     };
-    res.send(JSON.stringify({
-        success: true
-    }));
+    res.json({ success: true });
     next();
 };
