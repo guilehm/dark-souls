@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Guilehm/dark-souls#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "discord.js": "^11.5.1",
     "eslint": "^6.1.0",
     "express": "^4.17.1",
