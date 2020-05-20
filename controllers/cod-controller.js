@@ -14,5 +14,9 @@ module.exports = async (req, res) => {
         res.json(response.data);
     } catch (e) {
         logger.error(e.message);
+        res.status(e.response.status).json({
+            error: true,
+            message: e.message,
+        });
     }
 };
