@@ -16,10 +16,23 @@ const randomColor = require('random-color');
 
 const client = new Discord.Client();
 
-function sendLog(msg)  {
+function sendLog(msg) {
     client.channels
         .find(c => c.name === 'dark-souls-logs-debug')
         .send(`${msg.author} asking: ${msg.content}`);
+}
+
+
+async function sendDelayedMessage(msg, content, delay, lastDelay, reaction) {
+    msg.channel.startTyping();
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    msg.channel.send(content).then((m) => {
+        if (reaction) {
+            setTimeout(() => m.react(reaction), delay);
+        }
+    });
+    msg.channel.stopTyping();
+    await new Promise((resolve) => setTimeout(resolve, lastDelay));
 }
 
 module.exports = (req, res) => {
@@ -103,7 +116,7 @@ module.exports = (req, res) => {
                     emb.setTitle(companyData.Nome);
                     emb.setDescription(companyData.Características || '');
                     for (let field of Object.keys(companyData)) {
-                        if (field !== 'Nome' && field !== 'Características' && field !== 'Site B3'){
+                        if (field !== 'Nome' && field !== 'Características' && field !== 'Site B3') {
                             emb.addField(field, companyData[field], true);
                         }
                     }
